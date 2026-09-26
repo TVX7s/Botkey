@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tvx.lol</title>
+    <meta property="og:title" content="tvx.lol">
+    <meta property="og:description" content="TVX Bypass هو نظام ويب متطور وواجهة توجيه ذكية مصممة خصيصاً لتسهيل وتنظيم عملية عبور الروابط القصيرة وخدمات الإعلانات وشبكات التخطي المرتبطة بمنصة tvx.lol لتوفير تجربة مستخدم سلسة وآمنة.">
+    <meta property="og:image" content="https://i.ibb.co/d4VmFSmH/IMG-3696.png">
+    <meta property="og:type" content="website">
+    
+    <meta name="theme-color" content="#0000">
+   
+    <link rel="icon" type="image/webp" href="https://i.ibb.co/d4VmFSmH/IMG-3696.png">
+    <link rel="shortcut icon" href="https://i.ibb.co/d4VmFSmH/IMG-3696.png">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/d4VmFSmH/IMG-3696.png">
+    
+    <style>
+        @keyframes tvxSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes tvxFadeIn {
+            from { opacity: 0; transform: translateY(12px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes tvxDrain {
+            from { stroke-dashoffset: 0; }
+            to { stroke-dashoffset: -213.628; }
+        }
+        @keyframes bgGlowMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            background:
+                radial-gradient(ellipse 80% 60% at 50% -10%, rgba(52, 211, 153, 0.12), transparent 65%),
+                radial-gradient(ellipse 60% 50% at 100% 100%, rgba(34, 211, 238, 0.1), transparent 60%),
+                linear-gradient(135deg, #050507, #08090c, #04050a);
+            background-size: 200% 200%;
+            animation: bgGlowMove 12s ease infinite;
+            color: #ededed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+
+        .tvx-card {
+            position: relative;
+            width: 100%;
+            max-width: 28rem;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(10, 11, 16, 0.65);
+            padding: 2.5rem 2rem;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            animation: tvxFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            overflow: hidden;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .tvx-glow-em, .tvx-glow-cy {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(60px);
+        }
+        .tvx-glow-em {
+            right: -3rem; top: -3rem;
+            width: 12rem; height: 12rem;
+            background: rgba(52, 211, 153, 0.15);
+        }
+        .tvx-glow-cy {
+            left: -3rem; bottom: -3rem;
+            width: 12rem; height: 12rem;
+            background: rgba(34, 211, 238, 0.15);
+        }
+
+        .tvx-header {
+            position: relative;
+            margin-bottom: 1.75rem;
+        }
+        .tvx-title {
+            margin: 0 0 6px;
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .tvx-subtitle {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 0.8rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .tvx-content {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .tvx-timer {
+            position: relative;
+            width: 84px;
+            height: 84px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .tvx-timer svg {
+            position: absolute;
+            width: 84px;
+            height: 84px;
+            transform: rotate(-90deg);
+        }
+        .tvx-timer-track { stroke: rgba(255, 255, 255, 0.08); }
+        .tvx-progress-fill {
+            stroke: url(#tvx-timer-grad);
+            stroke-linecap: round;
+            stroke-dasharray: 213.628;
+            stroke-dashoffset: 0;
+            animation: tvxDrain 10s linear forwards;
+        }
+        .tvx-timer-num {
+            color: #ffffff;
+            font-size: 1.65rem;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+        }
+
+        #countdown {
+            margin: 0;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.55);
+        }
+
+        #nextBtn {
+            width: 100%;
+            margin-top: 6px;
+            padding: 12px 24px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        #nextBtn:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.14);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+        #nextBtn:active:not(:disabled) { transform: translateY(1px) scale(0.98); }
+        #nextBtn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        #nextBtn.tvx-cta {
+            background: linear-gradient(135deg, #34d399, #22d3ee);
+            color: #04241c;
+            border: none;
+            font-weight: 700;
+            box-shadow: 0 8px 20px rgba(52, 211, 153, 0.25);
+        }
+        #nextBtn.tvx-cta:hover {
+            filter: brightness(1.1);
+            box-shadow: 0 10px 25px rgba(34, 211, 238, 0.35);
+        }
+
+        #errorMsg {
+            display: none;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(248, 113, 113, 0.3);
+            background: rgba(248, 113, 113, 0.12);
+            color: fca5a5;
+            font-size: 0.85rem;
+            text-align: left;
+            word-break: break-all;
+        }
+
+        #spinner {
+            display: none;
+            width: 22px;
+            height: 22px;
+            border: 2.5px solid rgba(255, 255, 255, 0.2);
+            border-top-color: #34d399;
+            border-radius: 50%;
+            animation: tvxSpin 0.7s linear infinite;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="tvx-card">
+        <div class="tvx-glow-em"></div>
+        <div class="tvx-glow-cy"></div>
+        <div class="tvx-header">
+            <h1 class="tvx-title">TVX Bypass</h1>
+            <p class="tvx-subtitle" id="tvx-target">Preparing secure redirect...</p>
+        </div>
+        <div class="tvx-content">
+            <div class="tvx-timer">
+                <svg viewBox="0 0 84 84" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="tvx-timer-grad" x1="0" y1="0" x2="84" y2="84" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#34d399"/>
+                            <stop offset="1" stop-color="#22d3ee"/>
+                        </linearGradient>
+                    </defs>
+                    <circle class="tvx-timer-track" cx="42" cy="42" r="36" fill="none" stroke-width="3.5"/>
+                    <circle class="tvx-progress-fill" cx="42" cy="42" r="36" fill="none" stroke-width="3.5"/>
+                </svg>
+                <span id="tvx-timer-num" class="tvx-timer-num">10</span>
+            </div>
+            <p id="countdown">Starting in 10 seconds...</p>
+            <button id="nextBtn" type="button" disabled>Please wait...</button>
+            <div id="errorMsg"></div>
+            <div id="spinner"></div>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirectUrl = urlParams.get("redirect") || "https://tvx.lol";
+        
+        const targetEl = document.getElementById("tvx-target");
+        const countdownEl = document.getElementById("countdown");
+        const nextBtn = document.getElementById("nextBtn");
+        const timerNumEl = document.getElementById("tvx-timer-num");
+        const errorMsg = document.getElementById("errorMsg");
+        const spinner = document.getElementById("spinner");
+
+        if (targetEl) {
+            targetEl.textContent = redirectUrl;
+            targetEl.title = redirectUrl;
+        }
+
+        let time = 10;
+        const interval = setInterval(() => {
+            time--;
+            if (time > 0) {
+                timerNumEl.textContent = time;
+                countdownEl.textContent = `Starting in ${time} seconds...`;
+            } else {
+                clearInterval(interval);
+                timerNumEl.textContent = "0";
+                countdownEl.textContent = "Ready to continue";
+                nextBtn.disabled = false;
+                nextBtn.textContent = "Continue";
+                nextBtn.classList.add("tvx-cta");
+            }
+        }, 1000);
+
+        const performRedirect = () => {
+            if (nextBtn.disabled) return;
+            try {
+                nextBtn.disabled = true;
+                nextBtn.textContent = "Redirecting...";
+                nextBtn.style.display = "none";
+                spinner.style.display = "block";
+                setTimeout(() => {
+                    window.location.href = redirectUrl;
+                }, 400);
+            } catch (err) {
+                errorMsg.textContent = "Redirect failed. Please open manually: " + redirectUrl;
+                errorMsg.style.display = "block";
+                nextBtn.disabled = false;
+                nextBtn.style.display = "block";
+                spinner.style.display = "none";
+            }
+        };
+
+        nextBtn.addEventListener("click", performRedirect);
+        nextBtn.addEventListener("touchend", performRedirect);
+    </script>
+</body>
+</html>
